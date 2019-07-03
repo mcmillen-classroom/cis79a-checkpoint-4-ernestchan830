@@ -12,4 +12,9 @@ public class TrueFalseQuestion extends Question {
     public boolean checkAnswer(boolean ans){
         return mAnswer == ans;
     }
+
+    @Override
+    public boolean isTrueFalseQuestion() {
+        return true;
+    }
 }
