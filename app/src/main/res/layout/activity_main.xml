@@ -32,6 +32,7 @@
 
 
     <LinearLayout
+        android:id="@+id/true_false_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
@@ -58,6 +59,22 @@
             android:layout_marginTop="10dp"
             />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/fill_the_blank_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/edit_text"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/check_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/check_button"/>
     </LinearLayout>
 
     <LinearLayout
