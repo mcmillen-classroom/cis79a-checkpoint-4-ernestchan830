@@ -38,7 +38,7 @@ public class Question {
     public boolean isTrueFalseQuestion(){
         return false;
     }
-    public boolean isFillBlankQuestion(){
+    public boolean isFillTheBlankQuestion(){
         return false;
     }
     public boolean isMultipleChoiceQuestion(){

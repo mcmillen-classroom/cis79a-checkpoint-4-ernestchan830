@@ -63,6 +63,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mQuestions[3] = new TrueFalseQuestion(R.string.question_text4, R.string.question_text4_hint, true);
         mQuestions[4] = new TrueFalseQuestion(R.string.question_text5, R.string.question_text5_hint, false);
 
+        String[] q6Answers = getResources().getStringArray(R.array.question_6_answers);
+        mQuestions[5] = new FillTheBlankQuestion(R.string.question_text6, R.string.question_text6_hint, q6Answers);
+
         mTextView.setText(mQuestions[mIndex].getTextResId());
     }
 

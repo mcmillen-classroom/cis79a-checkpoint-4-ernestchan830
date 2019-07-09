@@ -13,8 +13,13 @@
     <string name="question_text4_hint">In the Alola region Pikachu faces a bug pokemon in an unsuccessful attempted capture.</string>
     <string name="question_text5">Ash has a rival named Jerry.</string>
     <string name="question_text5_hint">He has a four letter name.</string>
+    <string name="question_text6">What move does Pikachu not have?</string>
+    <string name="question_text6_hint">Pikachu is an electric type pokemon.</string>
     <string name="true_button">True</string>
     <string name="false_button">False</string>
 
     <string name="hint_text">Need Help?</string>
+    
+    
+    <string-array name="question_6_answers"></string-array>
 </resources>
