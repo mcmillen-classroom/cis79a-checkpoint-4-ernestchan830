@@ -44,5 +44,8 @@ public class Question {
     public boolean isMultipleChoiceQuestion(){
         return false;
     }
+    public boolean checkAnswer(int ans){
+    return false;
 
+    }
 }

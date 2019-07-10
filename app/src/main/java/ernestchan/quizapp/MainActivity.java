@@ -18,11 +18,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private LinearLayout mTrueFalseContainer;
     private LinearLayout mFillTheBlankContainer;
+    private LinearLayout mMultipleChoiceContainer;
 
     private EditText mEditText;
 
     TextView score_view;
-   // Button true_button;
+    // Button true_button;
 
     int score = 0;
 
@@ -32,6 +33,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageButton mBackButton;
     private Button mHelpButton;
     private Button mCheckButton;
+    private Button mAButton;
+    private Button mBButton;
+    private Button mCButton;
+    private Button mDButton;
 
     private Question[] mQuestions;
     private int mIndex;
@@ -48,9 +53,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mBackButton = (ImageButton) findViewById(R.id.back_button);
         mHelpButton = (Button) findViewById(R.id.hintTextResId);
         mCheckButton = (Button) findViewById(R.id.check_button);
+        mAButton = (Button) findViewById(R.id.a_button);
+        mBButton = (Button) findViewById(R.id.b_button);
+        mCButton = (Button) findViewById(R.id.c_button);
+        mDButton = (Button) findViewById(R.id.d_button);
+
 
         mTrueFalseContainer = (LinearLayout) findViewById(R.id.true_false_container);
         mFillTheBlankContainer = (LinearLayout) findViewById(R.id.fill_the_blank_container);
+        mMultipleChoiceContainer = (LinearLayout) findViewById(R.id.multiple_choice_container);
 
         mEditText = (EditText) findViewById(R.id.edit_text);
 
@@ -63,11 +74,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mBackButton.setOnClickListener(this);
         mHelpButton.setOnClickListener(this);
         mCheckButton.setOnClickListener(this);
+        mAButton.setOnClickListener(this);
+        mBButton.setOnClickListener(this);
+        mCButton.setOnClickListener(this);
+        mDButton.setOnClickListener(this);
+
 //when next button is clicked next button runs
 
         mTextView = (TextView) findViewById(R.id.text_view);
 
-        mQuestions = new Question[6];
+        mQuestions = new Question[7];
         mIndex = 0;
 
         mQuestions[0] = new TrueFalseQuestion(R.string.question_text1, R.string.question_text1_hint, true);
@@ -78,6 +94,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         String[] q6Answers = getResources().getStringArray(R.array.question_6_answers);
         mQuestions[5] = new FillTheBlankQuestion(R.string.question_text6, R.string.question_text6_hint, q6Answers);
+
+        mQuestions[6] = new MultipleChoiceQuestion(R.string.question_text7, R.string.question_text7_hint, R.array.question_7_answers, 2);
 
         setupQuestion();
     }
@@ -94,25 +112,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             score_view.setText("Score: " + score);
 
         } else if (view.getId() == R.id.next_button) {
-            if (mIndex < 5) {
+            if (mIndex < 6) {
                 mIndex++;
                 setupQuestion();
             }
-        }
-        else if (view.getId() == R.id.check_button) {
+        } else if (view.getId() == R.id.check_button) {
             if (mQuestions[mIndex].checkAnswer(mEditText.getText().toString())) {
                 checkAnswer(mEditText.getText().toString());
+                score_view.setText("Score: " + score);
             }
-//             else
-//            {
-//
-//            }
+             else
+            {
+                checkAnswer(mEditText.getText().toString());
+                score_view.setText("Score: " + score);
+            }
         } else if (view.getId() == R.id.back_button) {
             if (mIndex > 0) {
                 mIndex--;
                 setupQuestion();
-            }
-        } if (view.getId() == R.id.hintTextResId) {
+        } else if (view.getId() == R.id.a_button) {
+            checkAnswer(0);
+            score_view.setText("Score: " + score);}
+        } else if (view.getId() == R.id.b_button) {
+            checkAnswer(1);
+            score_view.setText("Score: " + score);
+        } else if (view.getId() == R.id.c_button) {
+            checkAnswer(2);
+            score_view.setText("Score: " + score);
+        } else if (view.getId() == R.id.d_button) {
+            checkAnswer(3);
+            score_view.setText("Score: " + score);
+        }
+        if (view.getId() == R.id.hintTextResId) {
 
             // USING INDEX
             Toast myToast = Toast.makeText(this, mQuestions[mIndex].getHintTextResId(), Toast.LENGTH_LONG);
@@ -128,9 +159,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (mQuestions[mIndex].isTrueFalseQuestion()) {
             mTrueFalseContainer.setVisibility(View.VISIBLE);
             mFillTheBlankContainer.setVisibility(View.GONE);
+            mMultipleChoiceContainer.setVisibility(View.GONE);
         } else if (mQuestions[mIndex].isFillTheBlankQuestion()) {
             mTrueFalseContainer.setVisibility(View.GONE);
             mFillTheBlankContainer.setVisibility(View.VISIBLE);
+            mMultipleChoiceContainer.setVisibility(View.GONE);
+        } else if (mQuestions[mIndex].isMultipleChoiceQuestion()) {
+            int optionsResId = ((MultipleChoiceQuestion) mQuestions[mIndex]).getmOptionsResId();
+            String[] options = getResources().getStringArray(optionsResId);
+            mTrueFalseContainer.setVisibility(View.GONE);
+            mFillTheBlankContainer.setVisibility(View.GONE);
+            mMultipleChoiceContainer.setVisibility(View.VISIBLE);
+            mAButton.setText(options[0]);
+            mBButton.setText(options[1]);
+            mCButton.setText(options[2]);
+            mDButton.setText(options[3]);
         }
     }
 
@@ -149,6 +192,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public boolean checkAnswer(String userInput) {
+        if (mQuestions[mIndex].checkAnswer(userInput)) {
+            Toast myToast = Toast.makeText(this, "You are correct", Toast.LENGTH_SHORT);
+            myToast.show();
+            score++;
+            return true;
+        } else {
+            Toast myToast = Toast.makeText(this, "You are incorrect", Toast.LENGTH_SHORT);
+            myToast.show();
+            score--;
+            return false;
+        }
+
+    }
+
+    public boolean checkAnswer(int userInput) {
         if (mQuestions[mIndex].checkAnswer(userInput)) {
             Toast myToast = Toast.makeText(this, "You are correct", Toast.LENGTH_SHORT);
             myToast.show();

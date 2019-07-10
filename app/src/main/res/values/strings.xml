@@ -13,8 +13,10 @@
     <string name="question_text4_hint">In the Alola region Pikachu faces a bug pokemon in an unsuccessful attempted capture.</string>
     <string name="question_text5">Ash has a rival named Jerry.</string>
     <string name="question_text5_hint">He has a four letter name.</string>
-    <string name="question_text6">Which move does Pikachu not have?</string>
-    <string name="question_text6_hint">Pikachu is an electric type pokemon.</string>
+    <string name="question_text6">What starter pokemon did Ash rescue from the rain</string>
+    <string name="question_text6_hint">It was a fire type only pokemon.</string>
+    <string name="question_text7">Which move does Pikachu not have?</string>
+    <string name="question_text7_hint">Pikachu is an electric type pokemon.</string>
     <string name="true_button">True</string>
     <string name="false_button">False</string>
 
@@ -22,5 +24,15 @@
     <string name="check_button">Check</string>
 
 
-    <string-array name="question_6_answers"></string-array>
+    <string-array name="question_6_answers">
+        <item>charmander</item>
+        <item>Charmander</item>
+    </string-array>
+    <string-array name="question_7_answers">
+        <item>Quick Attack</item>
+        <item>Thunderbolt</item>
+        <item>Extreme Speed</item>
+        <item>Electroball</item>
+    </string-array>
+
 </resources>
